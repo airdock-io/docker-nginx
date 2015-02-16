@@ -19,10 +19,11 @@ RUN curl http://nginx.org/keys/nginx_signing.key | apt-key add - && \
 	echo 'deb http://nginx.org/packages/debian/ wheezy nginx' > /etc/apt/sources.list.d/nginx.list && \
 	apt-get update -qq && \
 	apt-get install -y nginx-full=$NGINX_VERSION && \
-	apt-get clean -qq && \
-    ln -sf /dev/stdout /var/log/nginx/access.log && \
+	ln -sf /dev/stdout /var/log/nginx/access.log && \
     ln -sf /dev/stderr /var/log/nginx/error.log && \
 	echo '\n# prevent backgrounding (for Docker)\ndaemon off;' >> /etc/nginx/nginx.conf && \
+	chown -R www-data:www-data /var/log/nginx && \
+	apt-get clean -qq && \
 	rm -rf /var/lib/apt/lists/* /var/lib/apt/lists/* /tmp/* /var/tmp/* 
 
 ENV NGINX_USER www-data
