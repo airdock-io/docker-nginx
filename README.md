@@ -32,17 +32,22 @@ Purpose of this image is:
 	'docker run -t -i  airdock/nginx '
 
 
+Notes:
+
+- to customize configuration add your conf file under /etc/nginx/conf.d
+- to enable site add/remove configuration under /etc/nginx/sites-enabled
+
 From official repository, you could retrieve this few example of usage:
 
 ### static content
 
-'docker run --name airdock/nginx -v /some/content:/usr/share/nginx/html:ro -d nginx'
+'docker run --name airdock/nginx -v /some/content:/var/www/html:ro -d nginx'
 
 or with a Dockerfile:
 
 ```
 FROM airdock/nginx:latest
-COPY static-html-directory /usr/share/nginx/html
+COPY static-html-directory /var/www/html
 ```
 
 ### complex configuration
@@ -61,7 +66,10 @@ COPY nginx.conf /etc/nginx/nginx.conf
 ## Tag latest (current)
 
 - add nginx-full
-- declare NGINX_VERSION
+- declare NGINX_VERSION, NGINX_USER
+- fix launch deamon process
+- expose 80 and 443
+- add volume on log folder (/var/log/nginx) and default static html files (/var/www/html)
 
 # Build
 
