@@ -69,6 +69,7 @@ COPY nginx.conf /etc/nginx/nginx.conf
 - declare NGINX_VERSION, NGINX_USER
 - fix launch deamon process
 - expose 80 and 443
+- redirect default log to docker collector
 - add volume on log folder (/var/log/nginx) and default static html files (/var/www/html)
 
 # Build

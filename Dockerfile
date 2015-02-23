@@ -12,6 +12,9 @@ MAINTAINER Jerome Guibert <jguibert@gmail.com>
 # Version
 ENV NGINX_VERSION=1.6.2-5
 
+# Nginx User
+ENV NGINX_USER www-data
+
 # install nginx full
 # forward request and error logs to docker log collector
 # prevent backgrounding for Docker
@@ -22,11 +25,9 @@ RUN curl http://nginx.org/keys/nginx_signing.key | apt-key add - && \
 	ln -sf /dev/stdout /var/log/nginx/access.log && \
     ln -sf /dev/stderr /var/log/nginx/error.log && \
 	echo '\n# prevent backgrounding (for Docker)\ndaemon off;' >> /etc/nginx/nginx.conf && \
-	chown -R www-data:www-data /var/log/nginx && \
+	chown -R $NGINX_USER:$NGINX_USER /var/log/nginx && \
 	apt-get clean -qq && \
 	rm -rf /var/lib/apt/lists/* /var/lib/apt/lists/* /tmp/* /var/tmp/* 
-
-ENV NGINX_USER www-data
 
 # Default site
 VOLUME ["/var/www/html"]
