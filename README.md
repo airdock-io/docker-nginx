@@ -25,11 +25,14 @@ Purpose of this image is:
 
 # Usage
 
-1. You should have already install [Docker](https://www.docker.com/) and [Fig](http://www.fig.sh/) for more complex usage.
-2. Download [automated build](https://registry.hub.docker.com/u/airdock/) from public [Docker Hub Registry](https://registry.hub.docker.com/):
-`docker search airdock` or go directly in 3.
-3. Execute:
-	'docker run -t -i  airdock/nginx '
+You should have already install [Docker](https://www.docker.com/) and [Fig](http://www.fig.sh/) for more complex usage.
+Download [automated build](https://registry.hub.docker.com/u/airdock/) from public [Docker Hub Registry](https://registry.hub.docker.com/):
+`docker search airdock`.
+
+Execute:
+
+		docker run -t -i -p 80:80 -p 443:443 --name nginx airdock/nginx
+
 
 
 Notes:
@@ -39,11 +42,34 @@ Notes:
 
 From official repository, you could retrieve this few example of usage:
 
-### static content
+### static content from an external volume
 
-'docker run --name airdock/nginx -v /some/content:/var/www/html:ro -d nginx'
 
-or with a Dockerfile:
+	'docker run --name airdock/nginx -v /some/content:/var/www/html:ro -d nginx'
+
+
+The user www-data (uid 33) in your container should be known into your host. As it is a standard user, it should be erver present.
+See [How Managing user in docker container](https://github.com/airdock-io/docker-base/blob/master/README.md#how-managing-user-in-docker-container) and  [Common User List](https://github.com/airdock-io/docker-base/blob/master/CommonUserList.md).
+
+If 'www-data' user is not present, you should create it with this uid:gid:
+
+```
+  sudo groupadd www-data -g 33
+  sudo useradd -u 33  --no-create-home --system --no-user-group www-data
+  sudo usermod -g www-data www-data
+```
+
+And then set owner and permissions on your host directory:
+
+```
+	chown -R www-data:www-data /some/content
+```
+
+
+### static content in image
+
+
+With a Dockerfile:
 
 ```
 FROM airdock/nginx:latest
@@ -66,7 +92,7 @@ COPY nginx.conf /etc/nginx/nginx.conf
 ## Tag latest (current)
 
 - add nginx-full
-- declare NGINX_VERSION, NGINX_USER
+- declare NGINX_VERSION, NGINX_USER (www-data)
 - fix launch deamon process
 - expose 80 and 443
 - redirect default log to docker collector

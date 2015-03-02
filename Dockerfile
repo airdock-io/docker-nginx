@@ -23,11 +23,11 @@ RUN curl http://nginx.org/keys/nginx_signing.key | apt-key add - && \
 	apt-get update -qq && \
 	apt-get install -y nginx-full=$NGINX_VERSION && \
 	ln -sf /dev/stdout /var/log/nginx/access.log && \
-    ln -sf /dev/stderr /var/log/nginx/error.log && \
+  ln -sf /dev/stderr /var/log/nginx/error.log && \
 	echo '\n# prevent backgrounding (for Docker)\ndaemon off;' >> /etc/nginx/nginx.conf && \
 	chown -R $NGINX_USER:$NGINX_USER /var/log/nginx && \
 	apt-get clean -qq && \
-	rm -rf /var/lib/apt/lists/* /var/lib/apt/lists/* /tmp/* /var/tmp/* 
+	rm -rf /var/lib/apt/lists/* /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # Default site
 VOLUME ["/var/www/html"]
@@ -42,6 +42,3 @@ EXPOSE 80 443
 
 # default command
 CMD ["nginx"]
-
-
- 
