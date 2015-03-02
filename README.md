@@ -31,7 +31,7 @@ Download [automated build](https://registry.hub.docker.com/u/airdock/) from publ
 
 Execute:
 
-		docker run -t -i -p 80:80 -p 443:443 --name nginx airdock/nginx
+		docker run -d -p 80:80 -p 443:443 --name nginx airdock/nginx
 
 
 
@@ -45,7 +45,7 @@ From official repository, you could retrieve this few example of usage:
 ### static content from an external volume
 
 
-	'docker run --name airdock/nginx -v /some/content:/var/www/html:ro -d nginx'
+	'docker run -v /some/content:/var/www/html:ro -d -p 80:80 -p 443:443 --name nginx  airdock/nginx '
 
 
 The user www-data (uid 33) in your container should be known into your host. As it is a standard user, it should be erver present.
@@ -78,7 +78,7 @@ COPY static-html-directory /var/www/html
 
 ### complex configuration
 
-'docker run --name airdock/nginx -v /some/nginx.conf:/etc/nginx/nginx.conf:ro -d nginx'
+'docker run  -v /some/nginx.conf:/etc/nginx/nginx.conf:ro -d -p 80:80 -p 443:443 --name nginx  airdock/nginx'
 
 or with a Dockerfile:
 
