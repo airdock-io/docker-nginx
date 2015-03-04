@@ -26,11 +26,11 @@ RUN curl http://nginx.org/keys/nginx_signing.key | apt-key add - && \
   ln -sf /dev/stderr /var/log/nginx/error.log && \
 	echo '\n# prevent backgrounding (for Docker)\ndaemon off;' >> /etc/nginx/nginx.conf && \
 	chown -R $NGINX_USER:$NGINX_USER /var/log/nginx && \
-	apt-get clean -qq && \
-	rm -rf /var/lib/apt/lists/* /var/lib/apt/lists/* /tmp/* /var/tmp/*
+	/root/post-install
 
 # Default site
 VOLUME ["/var/www/html"]
+
 # log folder
 VOLUME ["/var/log/nginx"]
 
