@@ -28,11 +28,8 @@ RUN curl http://nginx.org/keys/nginx_signing.key | apt-key add - && \
 	chown -R $NGINX_USER:$NGINX_USER /var/log/nginx && \
 	/root/post-install
 
-# Default site
-VOLUME ["/var/www/html"]
-
-# log folder
-VOLUME ["/var/log/nginx"]
+# Default site and log folder
+VOLUME ["/var/www/html", "/var/log/nginx"]
 
 # to customize configuration add conf file under /etc/nginx/conf.d
 # to enable site add/remove configuration under /etc/nginx/sites-enabled
