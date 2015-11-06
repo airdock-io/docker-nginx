@@ -1,4 +1,4 @@
-# NGINX
+# NGINX [![](https://badge.imagelayers.io/airdock/nginx:latest.svg)](https://imagelayers.io/?images=airdock/nginx:latest 'Get your own badge on imagelayers.io')
 
 [Nginx](http://nginx.org/) [engine x] is an HTTP and reverse proxy server, as well as a mail proxy server, written by Igor Sysoev.
 
