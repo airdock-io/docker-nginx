@@ -7,7 +7,7 @@ Docker Image for Nginx based on airdock/base:latest.
 Purpose of this image is:
 
 - install [nginx full package](https://packages.debian.org/jessie/nginx-full)
-- nginx version: 1.6.2-5 (stable)
+- nginx version: 1.6.2-5+deb8u1 (stable)
 - based on airdock/base:latest (debian)
 - log nginx to stdout/stderr
 

@@ -10,7 +10,7 @@ FROM airdock/base:latest
 MAINTAINER Jerome Guibert <jguibert@gmail.com>
 
 # Version
-ENV NGINX_VERSION=1.6.2-5
+ENV NGINX_VERSION=1.6.2-5+deb8u1
 
 # Nginx User
 ENV NGINX_USER www-data
