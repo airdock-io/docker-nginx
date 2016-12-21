@@ -1,5 +1,5 @@
 NAME = airdock/nginx
-VERSION = 1.0
+VERSION = dev
 
 .PHONY: all clean build tag_latest release debug run
 
@@ -24,7 +24,7 @@ release: build tag_latest
 	@git push origin v-$(VERSION)
 
 debug:
-	docker run -t -i $(NAME):$(VERSION)
+	docker run -t -i $(NAME):$(VERSION) /bin/bash
 
 run:
 	@echo "IPAddress =" $$(docker inspect --format '{{.NetworkSettings.IPAddress}}' $$(docker run -d -p 80:80 -p 443:443 --name nginx $(NAME):$(VERSION)))

@@ -1,4 +1,5 @@
-# NGINX [![](https://badge.imagelayers.io/airdock/nginx:latest.svg)](https://imagelayers.io/?images=airdock/nginx:latest 'Get your own badge on imagelayers.io')
+# NGINX [![](https://images.microbadger.com/badges/image/airdock/nginx:latest.svg)](https://microbadger.com/images/airdock/nginx:latest "Get your own image badge on microbadger.com")
+
 
 [Nginx](http://nginx.org/) [engine x] is an HTTP and reverse proxy server, as well as a mail proxy server, written by Igor Sysoev.
 
@@ -6,15 +7,15 @@ Docker Image for Nginx based on airdock/base:latest.
 
 Purpose of this image is:
 
-- install [nginx full package](https://packages.debian.org/jessie/nginx-full)
-- nginx version: 1.6.2-5+deb8u1 (stable)
-- based on airdock/base:latest (debian)
+- install [nginx](https://packages.debian.org/jessie/nginx-full)
+- nginx version: 1.10.2-1~jessie (stable)
+- based on airdock/base:jessie
 - log nginx to stdout/stderr
+- use tini system
 
 
 > Name: airdock/nginx
 
-***Dependencies***: airdock/base:latest
 
 ***Few links***:
 
@@ -30,7 +31,6 @@ You should have already install [Docker](https://www.docker.com/).
 Execute:
 
 		docker run -d -p 80:80 -p 443:443 --name nginx airdock/nginx
-
 
 Notes:
 
@@ -89,7 +89,11 @@ COPY nginx.conf /etc/nginx/nginx.conf
 
 # Change Log
 
-## Tag latest (current)
+## 2016/12/21
+- remove nginx-full to ngnix
+- use ngnix version 1.10.2-1~jessie
+
+## before
 
 - add nginx-full
 - declare NGINX_VERSION, NGINX_USER (www-data)
